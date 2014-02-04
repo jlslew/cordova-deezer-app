@@ -29,6 +29,12 @@ define(function (require) {
 
             this.ko.applyBindings(this, document.getElementById(this.module()));
             $.mobile.navigate("#" + this.module());
+
+            this.request("GET", "/genre", {
+                output: "jsonp"
+            }).done(function (genres) {
+                Module.genres = genres;
+            });
         };
 
         this.request = function (type, url, data) {
