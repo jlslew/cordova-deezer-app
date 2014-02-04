@@ -18,20 +18,29 @@ var define;
 define(function (require) {
     "use strict";
     var Module = require("Module");
-    var ko = require("ko");
 
-    var Album = function (data, genres) {
-        this.title = ko.observable(data.title);
-        this.img = ko.observable({src: data.cover + "?size=small"});
+    var Album = function () {
+        this.album = this.ko.observable(null);
 
-        this.genre = ko.observable(data.genre_id === -1 ? "" : "Genre: " + $.grep(genres.data, function (genre) {
-            return genre.id === data.genre_id;
-        })[0].name);
+        this.Album = function () {
+            this.Module("Album", require("text!View/Album.html"));
+        };
 
-        this.info = function () {
-            Module.require("Album", {id: data.id});
+        this.execute = function (data) {
+            this.request("GET", "/album/" + data.id, {
+                output: "jsonp"
+            }).done(function (album) {
+                this.album(album.title);
+            }.bind(this));
         };
     };
 
-    return Album;
+    Album.prototype = new Module();
+
+    if (undefined === Album.instance) {
+        Album.instance = new Album();
+        Album.instance.Album();
+    }
+
+    return Album.instance;
 });

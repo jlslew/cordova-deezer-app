@@ -47,7 +47,7 @@
 			<div id="album">
 				<ul class="list-group" data-bind="foreach:albums" data-inset="true" data-role="listview">
 					<li class="list-group-item">
-						<section class="media">
+						<section class="media" data-bind="click:info">
 							<img alt="" class="media-object pull-left" data-bind="attr:img" src="" />
 							<div class="media-body">
 								<h4 class="media-heading" data-bind="text:title"></h4>
