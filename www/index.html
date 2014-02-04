@@ -17,11 +17,28 @@
 -->
 <html>
 	<head>
-		<title>TODO supply a title</title>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width">
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Deezer</title>
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="author" content="Jonathan Lee Slew" />
+
+		<link rel="stylesheet" href="lib/css/jquery.mobile-1.4.0.min.css" />
+		<link rel="stylesheet" href="lib/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="lib/css/font-awesome.min.css" />
+
+		<link rel="stylesheet" href="css/index.css" />
 	</head>
 	<body>
-		<div>TODO write content</div>
+		<article data-role="page" id="page-loader">
+			<div class="ui-content" role="main">
+				<div class="splash text-center">
+					<h1>APACHE CORDOVA</h1>
+					<i class="fa fa-3x fa-spin fa-spinner"></i>
+				</div>
+			</div>
+		</article>
+
+		<script data-main="app/index.js" src="lib/js/require-2.1.10.js"></script>
 	</body>
 </html>
