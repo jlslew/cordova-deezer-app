@@ -14,37 +14,33 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-var define, Media;
+var define;
 define(function (require) {
     "use strict";
     var Module = require("Module");
-    var ko = require("ko");
 
-    var Track = function (data) {
-        this.title = ko.observable(data.title);
-        this.desc = ko.observable(data.artist.name + " - " + data.album.title);
-        this.img = ko.observable({src: data.album.cover + "?size=small"});
+    var Artist = function () {
+        this.artist = this.ko.observable(null);
 
-        this.target = ko.observable({"data-target": "#collapse-" + data.id});
-        this.collapse = ko.observable({id: "collapse-" + data.id});
-
-        this.info = function () {
-            Module.require("Artist", {id: data.artist.id});
+        this.Artist = function () {
+            this.Module("Artist", require("text!View/Artist.html"));
         };
 
-        this.play = function () {
-            this.stop();
-
-            Track.media = new Media(data.preview);
-            Track.media.play();
-        };
-
-        this.stop = function () {
-            if (undefined !== Track.media) {
-                Track.media.stop();
-            }
+        this.execute = function (data) {
+            this.request("GET", "/artist/" + data.id, {
+                output: "jsonp"
+            }).done(function (artist) {
+                this.artist(artist.name);
+            }.bind(this));
         };
     };
 
-    return Track;
+    Artist.prototype = new Module();
+
+    if (undefined === Artist.instance) {
+        Artist.instance = new Artist();
+        Artist.instance.Artist();
+    }
+
+    return Artist.instance;
 });

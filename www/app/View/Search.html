@@ -29,13 +29,20 @@
 
 		<ul class="list-group" data-bind="foreach:tracks" data-inset="true" data-role="listview">
 			<li class="list-group-item">
-				<section class="media" data-bind="click:play">
+				<section class="media" data-bind="attr:target" data-toggle="collapse">
 					<img alt="" class="media-object pull-left" data-bind="attr:img" src="" />
 					<div class="media-body">
 						<h4 class="media-heading" data-bind="text:title"></h4>
 						<p data-bind="text:desc"></p>
 					</div>
 				</section>
+				<aside class="collapse" data-bind="attr:collapse" style="height:0">
+					<div class="btn-group btn-group-justified">
+						<p class="btn btn-default ui-btn" data-bind="click:play"><i class="fa fa-play"></i></p>
+						<p class="btn btn-default disabled ui-btn"><i class="fa fa-share"></i></p>
+						<p class="btn btn-default ui-btn" data-bind="click:info"><i class="fa fa-info"></i></p>
+					</div>
+				</aside>
 			</li>
 		</ul>
 	</div>
