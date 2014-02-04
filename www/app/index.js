@@ -18,7 +18,7 @@ var cordova, require;
 require.config({
     paths: {
         bs: "../lib/js/bootstrap.min",
-        cordova: "../cordova",
+        phonegap: "../phonegap",
         jqm: "../lib/js/jquery.mobile-1.4.0.min",
         jquery: "../lib/js/jquery-2.1.0.min",
         ko: "../lib/js/knockout-3.0.0",
@@ -29,7 +29,7 @@ require.config({
     }
 });
 
-require(["require", "jqm", "bs", "cordova"], function (require) {
+require(["require", "jqm", "bs", "phonegap"], function (require) {
     "use strict";
 
     $(document).on("deviceready", function () {
