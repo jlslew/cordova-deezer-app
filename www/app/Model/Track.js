@@ -14,7 +14,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-var define;
+var define, Media;
 define(function (require) {
     "use strict";
     var ko = require("ko");
@@ -23,6 +23,19 @@ define(function (require) {
         this.title = ko.observable(data.title);
         this.desc = ko.observable(data.artist.name + " - " + data.album.title);
         this.img = ko.observable({src: data.album.cover + "?size=small"});
+
+        this.play = function () {
+            this.stop();
+
+            Track.media = new Media(data.preview);
+            Track.media.play();
+        };
+
+        this.stop = function () {
+            if (undefined !== Track.media) {
+                Track.media.stop();
+            }
+        };
     };
 
     return Track;
