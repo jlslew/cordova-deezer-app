@@ -37,6 +37,10 @@ define(function (require) {
             });
         };
 
+        this.home = function () {
+            Module.require("Search");
+        };
+
         this.request = function (type, url, data) {
             return $.ajax({
                 data: data,
@@ -51,6 +55,8 @@ define(function (require) {
                 if (typeof Module.execute === "function") {
                     Module.execute(data || {});
                 }
+
+                $.mobile.navigate("#" + Module.module());
             });
         };
     };
