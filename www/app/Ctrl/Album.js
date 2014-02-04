@@ -20,7 +20,9 @@ define(function (require) {
     var Module = require("Module");
 
     var Album = function () {
+        this.tracks = this.ko.observableArray([]);
         this.album = this.ko.observable(null);
+        this.img = this.ko.observable(null);
 
         this.Album = function () {
             this.Module("Album", require("text!View/Album.html"));
@@ -30,7 +32,20 @@ define(function (require) {
             this.request("GET", "/album/" + data.id, {
                 output: "jsonp"
             }).done(function (album) {
+                this.img({src: album.cover + "?size=big"});
                 this.album(album.title);
+                data.album = album;
+            }.bind(this));
+
+            this.request("GET", "/album/" + data.id + "/tracks", {
+                output: "jsonp"
+            }).done(function (tracks) {
+                this.tracks($.map(tracks.data, function (track) {
+                    return (function (Track) {
+                        track.album = data.album;
+                        return new Track(track);
+                    }(require("Model/Track")));
+                }));
             }.bind(this));
         };
     };
