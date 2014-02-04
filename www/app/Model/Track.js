@@ -15,20 +15,15 @@
  * the License.
  */
 var define;
-define(["require", "ko"], function (require, ko) {
+define(function (require) {
     "use strict";
+    var ko = require("ko");
 
-    var Applet = function () {
-        this.Applet = function () {
-            ko.applyBindings(this);
-            require(["Ctrl/Search"]);
-        };
+    var Track = function (data) {
+        this.title = ko.observable(data.title);
+        this.desc = ko.observable(data.artist.name + " - " + data.album.title);
+        this.img = ko.observable({src: data.album.cover + "?size=small"});
     };
 
-    if (undefined === Applet.instance) {
-        Applet.instance = new Applet();
-        Applet.instance.Applet();
-    }
-
-    return Applet.instance;
+    return Track;
 });
